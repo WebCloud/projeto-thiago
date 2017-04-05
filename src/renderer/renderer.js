@@ -1,9 +1,10 @@
 import videoListView from '../video-list-view/videoListView';
+import videoView from '../video-view/videoView';
 
 const rootElement = document.getElementById('root');
 const appRoutes = {
   index: videoListView,
-  video: undefined
+  video: videoView
 };
 
 export default function render({ route = 'index', props } = {}) {

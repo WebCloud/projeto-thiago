@@ -7,7 +7,7 @@ const appRoutes = {
   video: videoView
 };
 
-export default function render({ route = 'index', props } = {}) {
+export default function render({ route = 'index', props, shouldPushState = true } = {}) {
   let routeView = appRoutes[route];
 
   if (typeof routeView === 'undefined') {
@@ -16,7 +16,11 @@ export default function render({ route = 'index', props } = {}) {
     }
 
     routeView = appRoutes.index(props);
-    history.pushState(null, null, 'index');
+
+    if (shouldPushState) {
+      history.pushState(props, null, 'index');
+    }
+
     console.error('No such route found');
   } else {
     routeView = routeView(props);
@@ -25,7 +29,9 @@ export default function render({ route = 'index', props } = {}) {
       child.remove();
     }
 
-    history.pushState(null, null, route);
+    if (shouldPushState) {
+      history.pushState(props, null, route);
+    }
   }
 
   rootElement.appendChild(routeView);

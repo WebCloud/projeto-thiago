@@ -1,5 +1,5 @@
 import mapCssStyles from '../utils/mapCssStyes';
-import render from '../renderer/renderer';
+import stateStore from '../state-store/stateStore';
 
 const liStyes = {
   display: 'block',
@@ -19,7 +19,7 @@ export function videoListItemElementFactory({ children = [], props }) {
   }
 
   const videoListItemElement = document.createElement('li');
-  videoListItemElement.onclick = () => render({ route: 'video', props });
+  videoListItemElement.onclick = () => stateStore({ state: 'video', props });
 
   for ( const child of children ) {
     videoListItemElement.appendChild(child);
